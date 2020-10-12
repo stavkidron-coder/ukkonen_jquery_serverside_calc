@@ -9,7 +9,6 @@
 </head>
 <body>
     <h1>jQuery Serverside Calc</h1>
-
     <div id="calcWrapper">
         <label htmlFor="input1">first value:</label>
         <input type="number" id="input1"/>
@@ -17,17 +16,14 @@
         <button id="subtract">-</button>
         <button id="multiply">*</button>
         <button id="divide">/</button>
-
         <label htmlFor="input2">second value:</label>
         <input type="number" id="input2"/>
         <button id="submit">=</button>
         <button id="clear">C</button>
     </div>
-
-    <p>The answer is: <span id="answer"></span></p>
-
-    <ul id="history"></ul>
-
-    
+    <div id="outputWrapper">
+        <p>The answer is: <span id="answer"></span></p>
+        <ul id="history"></ul>
+    </div>
 </body>
 </html>

@@ -12,6 +12,10 @@ app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 // get history
+app.get( '/math', ( req, res )=>{
+    console.log( '/math GET hit' );
+    res.send( history );
+}) // end /math GET
 
 // post for new equation
 app.post( '/math', ( req, res )=>{

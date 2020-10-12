@@ -2,7 +2,6 @@
 const express = require ('express');
 const bodyParser = require ('body-parser');
 const history = require('./modules/history');
-console.log(history);
 
 // globals
 const app = express();
@@ -30,8 +29,19 @@ app.post( '/math', ( req, res )=>{
     else if( req.body.operator === '/' ){
         answer = Number( req.body.input1 ) / Number( req.body.input2 );
     }
-    console.log( 'testAnswer:', answer );
-    res.send( 'meow' );
+    answerObject = {
+        answer: answer
+    } // sending an object instead of a number to avoid status code collision
+    res.send( answerObject );
+    // add this calculation to history
+    const historyObject = {
+        num1: req.body.input1,
+        operator: req.body.operator,
+        num2: req.body.input2,
+        answer: answer
+    } // end historyObject
+    history.push( historyObject );
+    console.log( 'history:', history );
 }) // end /math POST
 
 app.listen(port, () => {

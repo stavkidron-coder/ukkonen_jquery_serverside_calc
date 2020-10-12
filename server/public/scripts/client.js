@@ -62,6 +62,11 @@ function submitMath(){
         data: mathObject
     }).then( function( response ){
         console.log( 'back from server with:', response );
+        // display answer
+        let el = $( '#answer' );
+        el.empty();
+        el.append( response.answer );
+        // get history
     }).catch( function( err ){
         console.log( err );
         alert( 'nope' );

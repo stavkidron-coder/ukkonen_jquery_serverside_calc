@@ -17,6 +17,20 @@ app.use(bodyParser.urlencoded({extended: true}));
 // post for new equation
 app.post( '/math', ( req, res )=>{
     console.log( '/math POST hit:', req.body );
+    let answer = 0;
+    if( req.body.operator === '+' ){
+        answer = Number( req.body.input1 ) + Number( req.body.input2 );
+    }
+    else if( req.body.operator === '-' ){
+        answer = Number( req.body.input1 ) - Number( req.body.input2 );
+    }
+    else if( req.body.operator === '*' ){
+        answer = Number( req.body.input1 ) * Number( req.body.input2 );
+    }
+    else if( req.body.operator === '/' ){
+        answer = Number( req.body.input1 ) / Number( req.body.input2 );
+    }
+    console.log( 'testAnswer:', answer );
     res.send( 'meow' );
 }) // end /math POST
 

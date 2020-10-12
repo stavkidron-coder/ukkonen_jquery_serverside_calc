@@ -15,6 +15,7 @@ function onReady(){
     // clear inputs
     $('#clear').on( 'click', clearInputs );
     // perform GET request to server to get all history
+    getHistory();
 } // end onReady
 
 function chooseAdd(){
@@ -44,6 +45,29 @@ function clearInputs(){
     $('#input2').val( '' );
 } // end clearInputs
 
+function getHistory(){
+    console.log( 'in getHistory' );
+    //make an AJAX call to get history
+    $.ajax({
+        method: 'GET',
+        url: '/math'
+    }).then( function( response ){
+        console.log( 'back from GET with:', response );
+        // get element to which we'll append & empty
+        let el = $( '#history' );
+        el.empty();
+        // loop through array
+        for( let i=0; i<response.length; i++){
+            // display each object on the DOM
+            el.append( `<li>${ response[i].num1 } ${ response[i].operator } 
+                                ${ response[i].num2 } = ${ response[i].answer }</li>`)
+        } // end for
+    }).catch( function( err ){
+        alert( 'problem!' );
+        console.log( err );
+    })
+} // end getHistory
+
 function submitMath(){
     console.log('clicked');
     // grab the values from the DOM;
@@ -67,6 +91,7 @@ function submitMath(){
         el.empty();
         el.append( response.answer );
         // get history
+        getHistory();
     }).catch( function( err ){
         console.log( err );
         alert( 'nope' );

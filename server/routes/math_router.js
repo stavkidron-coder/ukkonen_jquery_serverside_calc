@@ -2,11 +2,19 @@
 const express = require('express');
 const router = express.Router();
 const history = require('../modules/history');
+const pool = require('../modules/pool');
 
 // get hsitory
 router.get( '/', ( req, res )=>{
-    console.log( '/math GET hit' );
-    res.send( history );
+    // console.log( '/math GET hit' );
+    // res.send( history );
+
+    //get data from db
+    let queryText = 'SELECT * FROM "history";';
+    pool.query(queryText).then((result) => {
+        console.log('result from database', result.rows);
+        res.send(result.rows);
+    });
 }) // end /math GET
 
 // post for new equation
